@@ -217,8 +217,12 @@ public class DiaryReadActivity extends BaseActivity implements View.OnClickListe
             diary.setDcontent(content);
             diary.setId(id);
 
-            ivPic.setImageURI(Uri.parse(dimgpath));
-            tvRead.setText(content);
+            if (dimgpath != null) {
+                ivPic.setImageURI(Uri.parse(dimgpath));
+            }
+            if (content != null) {
+                tvRead.setText(content);
+            }
             tvDate.setText(date);
 
         } else {
