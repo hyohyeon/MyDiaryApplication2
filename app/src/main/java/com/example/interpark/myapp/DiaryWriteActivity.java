@@ -41,7 +41,7 @@ public class DiaryWriteActivity extends BaseActivity implements View.OnClickList
     private Uri mImageCaptureUri;
     private ImageView ivPic;
     private int id_view;
-    private String id, date, no, dimgpath, content, updateFlag="NON";
+    private String id, date, no, dimgpath, content, updateFlag = "NON";
 
     private String absoultePath;
 
@@ -74,7 +74,6 @@ public class DiaryWriteActivity extends BaseActivity implements View.OnClickList
         tvNo = (TextView) findViewById(R.id.tvNo);
 
 
-
         if (MainpageActivity.UPDATEIS == "O") {
             Intent updatIntent = getIntent();
             updateFlag = updatIntent.getExtras().getString("FLAG");
@@ -87,8 +86,14 @@ public class DiaryWriteActivity extends BaseActivity implements View.OnClickList
             absoultePath = dimgpath;
             tvNo.setText(no);
             tvDate.setText(date);
-            ivPic.setImageURI(Uri.parse(dimgpath));
-            etWrite.setText(content);
+            // 이미지나 내용이 없을경우 발생하면 null 오류 발생하여
+            // 한번 더 체크하게 만듬
+            if (dimgpath != null) {
+                ivPic.setImageURI(Uri.parse(dimgpath));
+            }
+            if (content != null) {
+                etWrite.setText(content);
+            }
             MainpageActivity.UPDATEIS = "X";
         } else {
 
@@ -165,10 +170,10 @@ public class DiaryWriteActivity extends BaseActivity implements View.OnClickList
                     String query = sb.toString();
 
 
-                    query = query.replace("#imgpath#", "'"+diary.getDimgpath()+"'");
-                    query = query.replace("#content#", "'"+diary.getDcontent()+"'");
+                    query = query.replace("#imgpath#", "'" + diary.getDimgpath() + "'");
+                    query = query.replace("#content#", "'" + diary.getDcontent() + "'");
                     query = query.replace("#no#", tvNo.getText().toString());
-                    query = query.replace("#id#", "'"+diary.getId()+"'");
+                    query = query.replace("#id#", "'" + diary.getId() + "'");
                     db.execSQL(query);
                     db.close();
                     Intent intent = new Intent(DiaryWriteActivity.this, DiaryReadActivity.class);

@@ -70,8 +70,16 @@ public class DiaryReadActivity extends BaseActivity implements View.OnClickListe
         // setImage, setText
         // Intent로 받아온 데이터 뿌려주는 작업
         // 이미지 uri는 string으로 받아오기 때문에 parse작업이 꼭 필요함
-        ivPic.setImageURI(Uri.parse(dimgpath));
-        tvRead.setText(content);
+
+
+        // 이미지나 내용이 없을경우 발생하면 null 오류 발생하여
+        // 한번 더 체크하게 만듬
+        if (dimgpath != null) {
+            ivPic.setImageURI(Uri.parse(dimgpath));
+        }
+        if (content != null) {
+            tvRead.setText(content);
+        }
         tvDate.setText(date);
         tvNo.setText(no);
 
@@ -164,10 +172,6 @@ public class DiaryReadActivity extends BaseActivity implements View.OnClickListe
 
         // show
         alertDialog.show();
-
-
-
-
 
 
     }
