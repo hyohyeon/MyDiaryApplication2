@@ -103,6 +103,7 @@ public class DiaryReadActivity extends BaseActivity implements View.OnClickListe
                 DiaryVO diary = new DiaryVO();
                 diary.setId(id);
                 diary.setDdate(tvDate.getText().toString());
+                //diary.setNo(tvNo.getText().toString());
                 /* 이전버튼 = P, 다음버튼 = N */
                 String flag = "P";
                 changeDiaryData(diary, flag);
@@ -122,6 +123,7 @@ public class DiaryReadActivity extends BaseActivity implements View.OnClickListe
                 diary.setNo(tvNo.getText().toString());
                 modifyDiaryData(diary);
 
+                break;
                 //Intent intent = new Intent(DiaryReadActivity.this, DiaryWriteActivity.class);
                 //intent.putExtra("diary")
 
@@ -224,6 +226,7 @@ public class DiaryReadActivity extends BaseActivity implements View.OnClickListe
                 tvRead.setText(content);
             }
             tvDate.setText(date);
+            tvNo.setText(no);
 
         } else {
             Toast.makeText(getApplicationContext(), "일기가 없습니다.", Toast.LENGTH_SHORT).show();
